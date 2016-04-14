@@ -1,5 +1,7 @@
 # babel-plugin-yui
 
+![travis](https://travis-ci.org/jrubstein/babel-plugin-yui.svg?branch=master)
+
 Support for YUI
 
 ## Example
