@@ -1,1 +1,2 @@
+import 'poiuyghj';
 let foo = '';

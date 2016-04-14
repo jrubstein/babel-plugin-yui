@@ -10,7 +10,7 @@ YUI.add('Turtle', function (Y) {
   }, {
     ATTRS: {}
   });
-}, MODULE_VERSION, {
+}, '1.0.0', {
   'requires': [],
   'lang': [],
   'skinnable': false

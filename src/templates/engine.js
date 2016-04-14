@@ -8,10 +8,16 @@ let addTemplate = template(`
       MODULE_BODY,
       STATIC_BODY
     );
-  }, MODULE_VERSION, {
+  }, '1.0.0', {
     'requires': MODULE_REQUIRES,
     'lang': MODULE_LANG,
     'skinnable': HAS_SKIN
+  });
+`);
+
+let useTemplate = template(`
+  YUI().use(MODULE_REQUIRES, function(Y) {
+    MODULE_BODY
   });
 `);
 
@@ -27,5 +33,12 @@ export function add(id, superClassName, body, staticBody, metaData, requires) {
     MODULE_MIXINS: metaData.mixins,
     MODULE_NS: metaData.namespace,
     STATIC_BODY: staticBody
+  });
+};
+
+export function use(body, requires) {
+  return useTemplate({
+    MODULE_BODY: body,
+    MODULE_REQUIRES: types.arrayExpression(requires)
   });
 };

@@ -3,25 +3,53 @@ import propertyProccesor from './processors/classProperty';
 import methodProccesor from './processors/classMethod';
 import {hasDecoractor, parse} from './helpers/decorators';
 import * as member from './helpers/memberExpressions';
-import {add} from './templates/engine'
+import {add, use} from './templates/engine'
 
 export default function() {
   let requires = [];
+  let inProgess = false;
 
   return {
     // This plugin add easy access to the class properties
     inherits: require("babel-plugin-syntax-class-properties"),
     visitor: {
+      ExportNamedDeclaration(path) {
+        if (inProgess) {
+          return;
+        }
+        inProgess = true;
+        // We dont want any export declaration.
+        path.remove();
+        inProgess = false;
+      },
+
+      FunctionDeclaration(path) {
+        if (inProgess) {
+          return;
+        }
+        inProgess = true;
+        let {node} = path;
+        // This is a controller.
+        if (node.id.name === 'render') {
+          path.parentPath.replaceWith(use(node.body.body, requires));
+        }
+        inProgess = false;
+      },
+
       Class(path) {
         let innerBody = [];
         let staticBody = [];
         let attributes = [];
         let body = path.get('body');
-        let constructor;
         let ref;
         let metaData;
         let superClassName = 'Y.Base';
 
+        if (inProgess) {
+          return;
+        }
+
+        inProgess = true;
         if (path.get('superClass') && path.get('superClass').node) {
           if (types.isMemberExpression(path.get('superClass').node)) {
             let memberExpression = path.get('superClass').node;
@@ -69,7 +97,11 @@ export default function() {
           types.objectProperty(types.identifier('ATTRS'), types.objectExpression(attributes))
         );
 
-        path.replaceWith(add(ref.name, superClassName, types.objectExpression(innerBody), types.objectExpression(staticBody), metaData, requires));
+        path.replaceWith(add(ref.name, superClassName,
+          types.objectExpression(innerBody), types.objectExpression(staticBody),
+          metaData, requires));
+
+        inProgess = false;
       },
       Program: {
         enter(path) {
@@ -83,7 +115,7 @@ export default function() {
           }
         },
         exit(path) {
-          // Do we need this?
+          requires = [];
         }
       }
     }

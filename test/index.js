@@ -3,7 +3,9 @@
 var path = require('path'),
   fs = require('fs'),
   assert = require('assert'),
-  core = require('babel-core');
+  core = require('babel-core'),
+  traverse = require('babel-traverse').default,
+  babylon = require('babylon');
 
 function trim(str) {
   return str.replace(/^\s+|\s+$/, '');
@@ -18,8 +20,8 @@ describe('Options', () => {
     it(`Case ${caseName}`, () => {
       const actual = path.join(base, caseName, 'actual.js');
       const expected = fs.readFileSync(path.join(base, caseName, 'expected.js')).toString();
-      const result = core.transformFileSync(actual).code;
-      assert.equal(trim(result), trim(expected));
+      const {code, ast} = core.transformFileSync(actual);
+      assert.equal(trim(code), trim(expected));
     });
 
   });
