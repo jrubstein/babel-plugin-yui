@@ -30,7 +30,7 @@
     "clean": "rm -rf lib",
     "build": "babel src -d lib --optional es7.decorators",
     "test": "mocha --compilers js:babel-register",
-    "test:watch": "npm run test -- --watch",
+    "test:watch": "npm run test -- --watch"
   },
   "keywords": [
     "babel-plugin",
