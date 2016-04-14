@@ -16,7 +16,7 @@ install:
     - npm install
 
 before_script:
-  - npm install -g babel
+  - npm install -g babel babel-cli
 
 script:
   - npm test
