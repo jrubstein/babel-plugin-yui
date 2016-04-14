@@ -4,6 +4,7 @@
   "name": "babel-plugin-yui",
   "author": "Jonathan Rubstein",
   "main": "lib/index.js",
+  "license": "Apache-2.0",
   "dependencies": {
     "babel-core": "^6.3.17",
     "babel-plugin-syntax-class-properties": "^6.5.0",
@@ -16,7 +17,14 @@
   },
   "devDependencies": {
     "babel-register": "^6.7.2",
+    "grunt": "^1.0.1",
+    "grunt-cli": "^1.2.0",
+    "grunt-release": "^0.13.0",
     "mocha": "^2.2.5"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/jrubstein/babel-plugin-yui.git"
   },
   "scripts": {
     "clean": "rm -rf lib",
