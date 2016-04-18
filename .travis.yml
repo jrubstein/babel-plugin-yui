@@ -16,7 +16,7 @@ install:
     - npm install
 
 before_script:
-  - npm install -g grunt grunt-cli babel babel-cli
+    - npm install -g grunt grunt-cli babel-cli
 
 script:
-  - npm test
+    - npm test
