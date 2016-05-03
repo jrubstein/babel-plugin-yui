@@ -10,8 +10,7 @@ let addTemplate = template(`
     );
   }, '1.0.0', {
     'requires': MODULE_REQUIRES,
-    'lang': MODULE_LANG,
-    'skinnable': HAS_SKIN
+    'lang': MODULE_LANG
   });
 `);
 
@@ -21,15 +20,14 @@ let useTemplate = template(`
   });
 `);
 
-export function add(id, superClassName, body, staticBody, metaData, requires) {
+export function add(id, superClassName, body, staticBody, metaData, requires, name) {
   return addTemplate({
     MODULE_NAME: types.identifier(id),
-    MODULE_NAME_STRING: types.stringLiteral(id),
+    MODULE_NAME_STRING: types.stringLiteral(name),
     MODULE_BASE: types.identifier(superClassName),
     MODULE_BODY: body,
     MODULE_REQUIRES: types.arrayExpression(requires),
     MODULE_LANG: metaData.lang,
-    HAS_SKIN: types.booleanLiteral(metaData.style),
     MODULE_MIXINS: metaData.mixins,
     MODULE_NS: metaData.namespace,
     STATIC_BODY: staticBody

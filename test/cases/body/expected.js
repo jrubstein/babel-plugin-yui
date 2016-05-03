@@ -1,7 +1,7 @@
 'use strict';
 
-YUI.add('Turtle', function (Y) {
-  Y.namespace('WF2').Turtle = Y.Base.create('Turtle', Y.WF2.SOME.COOL.CLASS, [], {
+YUI.add('actual', function (Y) {
+  Y.namespace('WF2').Turtle = Y.Base.create('actual', Y.WF2.SOME.COOL.CLASS, [], {
     _private: 'I am private',
     alsoPrivate: ['Yes', 'No'],
     method: function (param) {
@@ -12,6 +12,5 @@ YUI.add('Turtle', function (Y) {
   });
 }, '1.0.0', {
   'requires': [],
-  'lang': [],
-  'skinnable': false
+  'lang': []
 });

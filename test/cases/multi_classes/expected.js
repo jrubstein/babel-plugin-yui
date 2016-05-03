@@ -1,29 +1,26 @@
 'use strict';
 
-YUI.add('Turtle', function (Y) {
-  Y.namespace('WF2').Turtle = Y.Base.create('Turtle', Y.Base, [], {}, {
+YUI.add('actual', function (Y) {
+  Y.namespace('WF2').Turtle = Y.Base.create('actual', Y.Base, [], {}, {
     ATTRS: {}
   });
 }, '1.0.0', {
   'requires': [],
-  'lang': [],
-  'skinnable': false
+  'lang': []
 });
-YUI.add('Rabbit', function (Y) {
-  Y.namespace('WF2').Rabbit = Y.Base.create('Rabbit', Y.Base, [], {}, {
+YUI.add('actual', function (Y) {
+  Y.namespace('WF2').Rabbit = Y.Base.create('actual', Y.Base, [], {}, {
     ATTRS: {}
   });
 }, '1.0.0', {
   'requires': [],
-  'lang': [],
-  'skinnable': false
+  'lang': []
 });
-YUI.add('Lion', function (Y) {
-  Y.namespace('WF2').Lion = Y.Base.create('Lion', Y.Base, [], {}, {
+YUI.add('actual', function (Y) {
+  Y.namespace('WF2').Lion = Y.Base.create('actual', Y.Base, [], {}, {
     ATTRS: {}
   });
 }, '1.0.0', {
   'requires': [],
-  'lang': [],
-  'skinnable': false
+  'lang': []
 });

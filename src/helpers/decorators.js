@@ -12,9 +12,7 @@ export function parse({node}) {
   if (node.decorators) {
     node.decorators.filter((decorator) => {
       let type = decorator.expression.type;
-      if (type === 'Identifier' && decorator.expression.name.toLowerCase() === 'style') {
-        config.style = true;
-      } else if (type === 'CallExpression' && decorator.expression.callee.name.toLowerCase() === 'lang') {
+      if (type === 'CallExpression' && decorator.expression.callee.name.toLowerCase() === 'lang') {
         config.lang = decorator.expression.arguments;
       } else if (type === 'CallExpression' && decorator.expression.callee.name.toLowerCase() === 'mixins') {
         config.mixins = decorator.expression.arguments;

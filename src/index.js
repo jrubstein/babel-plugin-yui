@@ -3,7 +3,8 @@ import propertyProccesor from './processors/classProperty';
 import methodProccesor from './processors/classMethod';
 import {hasDecoractor, parse} from './helpers/decorators';
 import * as member from './helpers/memberExpressions';
-import {add, use} from './templates/engine'
+import {add, use} from './templates/engine';
+import nPath from 'path';
 
 export default function() {
   let requires = [];
@@ -99,7 +100,7 @@ export default function() {
 
         path.replaceWith(add(ref.name, superClassName,
           types.objectExpression(innerBody), types.objectExpression(staticBody),
-          metaData, requires));
+          metaData, requires, this.file.opts.basename));
 
         inProgess = false;
       },
@@ -108,9 +109,12 @@ export default function() {
           for (let path of path.get('body')) {
             // Finds all the imports
             if (path.isImportDeclaration()) {
-              requires.push(types.stringLiteral(path.node.source.value));
+              let module = path.node.source.value;
+              requires.push(types.stringLiteral(nPath.basename(module, '.js')));
               //  modules.push(t.stringLiteral(path.node.specifiers[0].local.name));
-              path.remove();
+              if (module.indexOf('/') === -1) {
+                path.remove();
+              }
             }
           }
         },
