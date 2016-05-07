@@ -5,6 +5,5 @@ YUI.add('actual', function (Y) {
     ATTRS: {}
   });
 }, '1.0.0', {
-  'requires': [],
-  'lang': []
+  'requires': []
 });

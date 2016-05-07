@@ -9,8 +9,7 @@ let addTemplate = template(`
       STATIC_BODY
     );
   }, '1.0.0', {
-    'requires': MODULE_REQUIRES,
-    'lang': MODULE_LANG
+    'requires': MODULE_REQUIRES
   });
 `);
 
@@ -27,7 +26,6 @@ export function add(id, superClassName, body, staticBody, metaData, requires, na
     MODULE_BASE: types.identifier(superClassName),
     MODULE_BODY: body,
     MODULE_REQUIRES: types.arrayExpression(requires),
-    MODULE_LANG: metaData.lang,
     MODULE_MIXINS: metaData.mixins,
     MODULE_NS: metaData.namespace,
     STATIC_BODY: staticBody
