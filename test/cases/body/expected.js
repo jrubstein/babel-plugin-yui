@@ -4,7 +4,7 @@ YUI.add('actual', function (Y) {
   Y.namespace('WF2').Turtle = Y.Base.create('actual', Y.WF2.SOME.COOL.CLASS, [], {
     _private: 'I am private',
     alsoPrivate: ['Yes', 'No'],
-    method: function (param) {
+    method: function method(param) {
       console.log('method');
     }
   }, {
