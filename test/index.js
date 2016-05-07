@@ -3,8 +3,7 @@
 var path = require('path'),
   fs = require('fs'),
   assert = require('assert'),
-  core = require('babel-core'),
-  babylon = require('babylon');
+  core = require('babel-core');
 
 function trim(str) {
   return str.replace(/^\s+|\s+$/, '');
