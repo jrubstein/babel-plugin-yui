@@ -4,7 +4,6 @@ var path = require('path'),
   fs = require('fs'),
   assert = require('assert'),
   core = require('babel-core'),
-  traverse = require('babel-traverse').default,
   babylon = require('babylon');
 
 function trim(str) {
