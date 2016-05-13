@@ -3,7 +3,7 @@ import * as types from 'babel-types';
 
 // https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Template_literals
 let addTemplate = template(`
-  YUI.add(MODULE_NAME_STRING, function(Y) {
+  var MODULE_NAME = YUI.add(MODULE_NAME_STRING, function(Y) {
     Y.namespace(MODULE_NS).MODULE_NAME = Y.Base.create(MODULE_NAME_STRING, MODULE_BASE, MODULE_MIXINS,
       MODULE_BODY,
       STATIC_BODY

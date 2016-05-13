@@ -1,6 +1,6 @@
 'use strict';
 
-YUI.add('actual', function (Y) {
+var Turtle = YUI.add('actual', function (Y) {
   Y.namespace('WF2').Turtle = Y.Base.create('actual', Y.Base, [], {}, {
     ATTRS: {}
   });

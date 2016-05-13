@@ -1,6 +1,6 @@
 'use strict';
 
-YUI.add('actual', function (Y) {
+var Turtle = YUI.add('actual', function (Y) {
   Y.namespace('WF2').Turtle = Y.Base.create('actual', Y.WF2.SOME.COOL.CLASS, [], {
     _private: 'I am private',
     alsoPrivate: ['Yes', 'No'],
