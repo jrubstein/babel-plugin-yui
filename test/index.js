@@ -19,6 +19,7 @@ describe('Options', () => {
       const actual = path.join(base, caseName, 'actual.js');
       const expected = fs.readFileSync(path.join(base, caseName, 'expected.js')).toString();
       const {code, ast} = core.transformFileSync(actual);
+      // console.log(code);
       assert.equal(trim(code), trim(expected));
     });
 
