@@ -18,9 +18,15 @@ describe('Options', () => {
     it(`Case ${caseName}`, () => {
       const actual = path.join(base, caseName, 'actual.js');
       const expected = fs.readFileSync(path.join(base, caseName, 'expected.js')).toString();
-      const {code, ast} = core.transformFileSync(actual);
-      // console.log(code);
-      assert.equal(trim(code), trim(expected));
+      try {
+        const {code, ast} = core.transformFileSync(actual);
+        assert.equal(trim(code), trim(expected));
+      } catch(e) {
+        if (caseName !== 'fail') {
+          assert.fail('This test shouldnt fail.');
+        }
+        assert.ok(e.message.indexOf('Controllers cannot have YUI.add') > 0);
+      }
     });
 
   });

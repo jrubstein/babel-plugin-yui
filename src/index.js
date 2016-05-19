@@ -1,14 +1,17 @@
 import * as types from 'babel-types';
-import propertyProccesor from './processors/classProperty';
-import methodProccesor from './processors/classMethod';
-import {hasDecoractor, parse} from './helpers/decorators';
-import * as member from './helpers/memberExpressions';
 import {add, use} from './templates/engine';
 import nPath from 'path';
 
 export default function() {
   let requires = [];
   let inProgess = false;
+  let yui = false;
+
+  function clean() {
+    yui = false;
+    inProgess = false;
+    requires = [];
+  };
 
   return {
     // This plugin add easy access to the class properties
@@ -22,6 +25,10 @@ export default function() {
         let {node} = path;
         // This is a controller.
         if (node.id.name === 'render') {
+          if (yui) {
+            clean();
+            throw Error('Controllers cannot have YUI.add');
+          }
           path.parentPath.replaceWith(use(node.body.body, requires));
         }
         inProgess = false;
@@ -34,8 +41,13 @@ export default function() {
             // Finds all the imports
             if (path.isImportDeclaration()) {
               let module = path.node.source.value;
-              requires.push(types.stringLiteral(nPath.basename(module, '.js')));
-              //  modules.push(t.stringLiteral(path.node.specifiers[0].local.name));
+              if (module.toLowerCase() === 'yui') {
+                yui = true;
+                addY = true;
+              } else {
+                requires.push(types.stringLiteral(nPath.basename(module, '.js')));
+                //  modules.push(t.stringLiteral(path.node.specifiers[0].local.name));
+              }
               if (module.indexOf('/') === -1) {
                 path.remove();
               }
@@ -52,7 +64,7 @@ export default function() {
           }
         },
         exit(path) {
-          requires = [];
+          clean();
         }
       }
     }
