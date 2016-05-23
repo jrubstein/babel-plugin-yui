@@ -5,10 +5,8 @@ import nPath from 'path';
 export default function() {
   let requires = [];
   let inProgess = false;
-  let yui = false;
 
   function clean() {
-    yui = false;
     inProgess = false;
     requires = [];
   };
@@ -25,10 +23,6 @@ export default function() {
         let {node} = path;
         // This is a controller.
         if (node.id.name === 'render') {
-          if (yui) {
-            clean();
-            throw Error('Controllers cannot have YUI.add');
-          }
           path.parentPath.replaceWith(use(node.body.body, requires));
         }
         inProgess = false;
@@ -36,26 +30,20 @@ export default function() {
 
       Program: {
         enter(path) {
-          let addY = false;
+          let addY = true;
           for (let path of path.get('body')) {
             // Finds all the imports
             if (path.isImportDeclaration()) {
               let module = path.node.source.value;
-              if (module.toLowerCase() === 'yui') {
-                yui = true;
-                addY = true;
-              } else {
-                requires.push(types.stringLiteral(nPath.basename(module, '.js')));
-                //  modules.push(t.stringLiteral(path.node.specifiers[0].local.name));
-              }
+              requires.push(types.stringLiteral(nPath.basename(module, '.js')));
+              //  modules.push(t.stringLiteral(path.node.specifiers[0].local.name));
               if (module.indexOf('/') === -1) {
                 path.remove();
               }
-            } else if (path.isClassDeclaration()) {
-              addY = true;
             } else if (path.isExportDefaultDeclaration() || path.isExportDeclaration()) {
-              if (path.node.declaration.type === 'ClassDeclaration') {
-                addY = true;
+              if (path.node.declaration.type === 'FunctionDeclaration' &&
+                path.node.declaration.id.name === 'render') {
+                addY = false;
               }
             }
           }
