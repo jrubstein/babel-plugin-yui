@@ -16,4 +16,4 @@ before_script:
     - npm install -g grunt grunt-cli babel-cli
 
 script:
-    - npm run build;npm test
+    - npm run build
