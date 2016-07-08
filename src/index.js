@@ -35,7 +35,9 @@ export default function() {
             // Finds all the imports
             if (path.isImportDeclaration()) {
               let module = path.node.source.value;
-              requires.push(types.stringLiteral(nPath.basename(module, '.js')));
+              if (path.node.specifiers.length == 0 || module.indexOf('/')  >= 0) {
+                requires.push(types.stringLiteral(nPath.basename(module, '.js')));
+              }
               //  modules.push(t.stringLiteral(path.node.specifiers[0].local.name));
               if (path.node.specifiers.length <= 0) {
                 path.remove();
