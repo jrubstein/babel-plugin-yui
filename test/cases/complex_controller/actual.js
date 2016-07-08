@@ -1,4 +1,4 @@
-import MyModule from 'Module';
+import 'Module';
 
 function some() {}
 
